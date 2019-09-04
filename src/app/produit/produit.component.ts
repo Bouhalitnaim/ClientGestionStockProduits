@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 
 import {Produit} from '../shared/produit';
-import {Form, FormBuilder, FormGroup, Validators} from '@angular/forms';
+import { FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ProduitService} from './produit.service';
 import {ActivatedRoute} from '@angular/router';
 
@@ -16,10 +16,9 @@ import {ActivatedRoute} from '@angular/router';
 export class ProduitComponent implements OnInit {
 
   produits: Produit[];
-
   produitForm: FormGroup;
-
   operation: String = 'add';
+
   selectedProduit: Produit;
 
   constructor(private produitService: ProduitService, private fb: FormBuilder , private route: ActivatedRoute) {
