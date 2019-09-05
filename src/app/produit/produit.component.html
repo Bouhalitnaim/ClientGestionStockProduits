@@ -1,6 +1,6 @@
 <h3>Produits</h3>
 <div>
-  <div class="row">
+  <div class="row" >
     <div class="col-lg-7">
       <table class="table table-hover">
         <thead>
@@ -28,7 +28,7 @@
         </tbody>
       </table>
     </div>
-    <div class="col-lg-5">
+    <div class="col-lg-5" *ngIf="selectedProduit">
       <div class="card">
         <div class="card-header bg-info text-white" >
           {{operation == 'add' ? 'Ajouter un Produit' :
@@ -37,7 +37,7 @@
         </div>
         <div class="card-body">
           <div *ngIf="operation=='add'|| operation == 'edit'">
-            <form [formGroup]="produitForm">
+            <form [formGroup]="produitForm" *ngIf="selectedProduit">
               <div class="form-group">
                 <label>Référence</label>
                 <input type="text" class="form-control" formControlName="refer" [(ngModel)]="selectedProduit.refer"/>
