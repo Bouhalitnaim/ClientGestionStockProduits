@@ -15,7 +15,7 @@
         </thead>
         <tbody>
         <tr *ngFor=" let produit of produits ">
-          <td>{{produit.ref}}</td>
+          <td>{{produit.refer}}</td>
           <td>{{produit.quantite}}</td>
           <td>{{produit.prixUnitaire}}</td>
           <td>
@@ -40,10 +40,10 @@
             <form [formGroup]="produitForm">
               <div class="form-group">
                 <label>Référence</label>
-                <input type="text" class="form-control" formControlName="ref" [(ngModel)]="selectedProduit.ref"/>
+                <input type="text" class="form-control" formControlName="refer" [(ngModel)]="selectedProduit.refer"/>
               </div>
               <div class="alert alert-danger"
-                   *ngIf="produitForm.controls['ref'].invalid && (produitForm.controls['ref'].touched || produitForm.controls['ref'].dirty) ">
+                   *ngIf="produitForm.controls['refer'].invalid && (produitForm.controls['refer'].touched || produitForm.controls['refer'].dirty) ">
                 Référence est obligatoire !
               </div>
               <div class="form-group">
@@ -64,12 +64,12 @@
           </div>
           <div *ngIf="operation =='remove'">
             <p class="card-title">
-              Référence : {{selectedProduit.ref}}
+              Référence : {{selectedProduit.refer}}
             </p>
             <p>
               Voulez-vous supprimer ce produit ?
             </p>
-            <button class="btn btn-success" [disabled]="!selectedProduit.ref" (click)= "deleteProduit()" > Confirmer </button>
+            <button class="btn btn-success" [disabled]="!selectedProduit.refer" (click)= "deleteProduit()" > Confirmer </button>
           </div>
         </div>
         <div class="card-footer">

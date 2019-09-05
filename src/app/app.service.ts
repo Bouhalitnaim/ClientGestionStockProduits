@@ -15,21 +15,7 @@ authenticated : boolean= false;
 
   constructor(private http:HttpClient,
               private cookieService:CookieService) { }
-
-
-  // authenticate(credentials , callback){
-  //   if(credentials && credentials.username == 'user' && credentials.password == 'password1'){
-  //       this.authenticated = true;
-  //       return callback && callback();
-  //
-  //     } else {
-  //     this.authenticated= false;
-  //   }
-  //   return '';
-  // }
-
   authenticate(credentials , callback){
-    console.log('test');
     if(credentials){
       const token = btoa(credentials.username + ':' + credentials.password);
         this.cookieService.set('token', token);

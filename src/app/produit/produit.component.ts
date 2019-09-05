@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 
 import {Produit} from '../shared/produit';
-import { FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {ProduitService} from './produit.service';
 import {ActivatedRoute} from '@angular/router';
 
@@ -33,7 +33,7 @@ export class ProduitComponent implements OnInit {
 
   creatForm() {
     this.produitForm = this.fb.group({
-      ref: ['', Validators.required],
+      refer:['', Validators.required],
       quantite: '',
       prixUnitaire: ''
     });
