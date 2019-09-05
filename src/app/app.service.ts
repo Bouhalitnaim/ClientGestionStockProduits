@@ -24,6 +24,7 @@ authenticated : boolean= false;
       this.http.get(API_URLS.USER_URL).
       subscribe(response => {
         if (response && response['name']) {
+          console.log(response);
         this.authenticated = true;
       }else{
         this.authenticated= false;
