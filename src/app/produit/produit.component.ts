@@ -4,6 +4,8 @@ import {Produit} from '../shared/produit';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {ProduitService} from './produit.service';
 import {ActivatedRoute} from '@angular/router';
+import {DataModel} from '../shared/data.model';
+
 
 
 @Component({
@@ -15,78 +17,34 @@ import {ActivatedRoute} from '@angular/router';
 
 export class ProduitComponent implements OnInit {
 
-  produits: Produit[];
-  produitForm: FormGroup;
-  operation: String = 'add';
+  produitForm : FormGroup;
 
-  selectedProduit: Produit;
+  produit :Produit = new Produit();
+
+  produits : Produit[];
+
+  produitsModel : DataModel[];
 
   constructor(private produitService: ProduitService, private fb: FormBuilder , private route: ActivatedRoute) {
-    this.creatForm();
-
   }
 
   ngOnInit() {
-    this.loadProduits();
-   this.produits = this.route.snapshot.data.produits;
-  }
+    this.produits= this.route.snapshot.data.produits;
+      this.produitForm = this.fb.group({
+        refer:['', Validators.required],
+        quantite: '',
+        prixUnitaire: ''
+      });
 
-  creatForm() {
-    this.produitForm = this.fb.group({
-      refer:['', Validators.required],
-      quantite: '',
-      prixUnitaire: ''
-    });
-  }
-
-  loadProduits() {
-    this.produitService.getProduits().subscribe(
-      data => {
-        this.produits = data;
-      },
-      error => {
-        console.log('An error was occured.');
-      },
-      () => {
-        console.log('loading produits was done.');
-      }
-    );
-  }
-
-  addProduit() {
-    const p = this.produitForm.value;
-    this.produitService.addProduit(p).subscribe(
-      res => {
-        this.initProduit();
-        this.loadProduits();
-      }
-    );
-  }
-
-  updateProduit() {
-    this.produitService.updateProduit(this.selectedProduit).subscribe(
-      res => {
-        this.initProduit();
-        this.loadProduits();
-      }
-    );
-  }
-
-  initProduit() {
-    this.selectedProduit = new Produit();
-    this.creatForm();
-  }
+      this.produitsModel= [
+        new DataModel('id','ID','number',true,[]),
+        new DataModel('refer','Référence','String',false,[]),
+        new DataModel('quantite','Quantité','number',false,[]),
+        new DataModel('prixUnitaire','Prix Unitaire','number',false,[]),
+      ]
 
 
-  deleteProduit(){
-    this.produitService.deleteProduit(this.selectedProduit.id).
-    subscribe(
-      res =>{
-        this.selectedProduit = new Produit();
-        this.loadProduits();
-      }
-    );
+}
 
-  }
 
 }

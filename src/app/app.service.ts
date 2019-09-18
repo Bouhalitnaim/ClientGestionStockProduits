@@ -4,6 +4,10 @@ import {API_URLS} from './config/api.url.config';
 import {CookieService} from 'ngx-cookie-service';
 import 'rxjs/add/operator/finally';
 import 'rxjs-compat/add/operator/map';
+import {Store} from '@ngrx/store';
+import {PrincipalState} from './shared/principal.state';
+import {SAVE_PRINCIPAL} from './shared/save.principal.action';
+
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +19,8 @@ authenticated : boolean= false;
 
 
   constructor(private http:HttpClient,
-              private cookieService:CookieService) { }
+              private cookieService:CookieService,
+              private store:Store<PrincipalState>) { }
   authenticate(credentials , callback){
     if(credentials){
       const token = btoa(credentials.username + ':' + credentials.password);
@@ -25,7 +30,11 @@ authenticated : boolean= false;
       subscribe(response => {
         if (response && response['name']) {
           console.log(response);
-        this.authenticated = true;
+          this.authenticated = true;
+        this.store.dispatch({
+          type: SAVE_PRINCIPAL,
+          payload: response
+        })
       }else{
         this.authenticated= false;
         }
@@ -35,10 +44,6 @@ authenticated : boolean= false;
     else {
       this.authenticated= false;
     }
-  }
-
-  logout(callback){
-    return callback && callback();
   }
 
 }
