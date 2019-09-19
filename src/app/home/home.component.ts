@@ -22,7 +22,7 @@ export class HomeComponent implements OnInit {
 
     }else {
 
-      this.router.navigateByUrl('/home/(contentOutlet:produit)');
+      this.router.navigateByUrl('/home/(contentOutlet:dashboard)');
     }
   }
 

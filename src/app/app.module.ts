@@ -23,6 +23,8 @@ import {StoreModule} from '@ngrx/store';
 import {principalReducer} from './shared/principal.reducer';
 import {UserService} from './user/user.service';
 import { CrudComponent } from './shared/crud/crud.component';
+import { ChartModule } from 'angular2-chartjs';
+import { MyChartComponent } from './my-chart/my-chart.component';
 
 @NgModule({
   declarations: [
@@ -36,9 +38,10 @@ import { CrudComponent } from './shared/crud/crud.component';
     HomeComponent,
     UserComponent,
     CrudComponent,
+    MyChartComponent,
   ],
   imports: [
-    BrowserModule, AppRoutingModule, ReactiveFormsModule, HttpClientModule,StoreModule.forRoot({principal:principalReducer})
+    ChartModule, BrowserModule, AppRoutingModule, ReactiveFormsModule, HttpClientModule,StoreModule.forRoot({principal:principalReducer})
   ],
   providers: [
     ProduitMockService,
